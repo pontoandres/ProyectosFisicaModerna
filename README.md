@@ -14,7 +14,7 @@ Este proyecto modela la trayectoria de una partícula alfa al acercarse a un nú
 
 ## 🚀 ¿Cómo ejecutar el proyecto?
 
-Necesitas **dos terminales abiertas al mismo tiempo**, una para el backend y otra para el frontend.  
+Necesitas **python 3.12 y dos terminales abiertas al mismo tiempo**. Para abrir una terminal en windows presiona "windows key" + "R" y luego escribe cmd y presiona "enter". Necesitas dos terminales porque es una para el backend y otra para el frontend.  
 En **cada terminal**, asegúrate de navegar primero a la carpeta donde clonaste el repositorio usando el comando `cd`.
 
 Por ejemplo:
