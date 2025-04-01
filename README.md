@@ -4,9 +4,11 @@ Este proyecto modela la trayectoria de una partícula alfa al acercarse a un nú
 
 ---
 ## Autores
-Ponto Andres Moreno 202224525
-Nicolas Gomez  202024568
-Veronica Ayala 201921857
+
+- Ponto Andres Moreno – 202224525  
+- Nicolas Gomez – 202024568  
+- Veronica Ayala – 201921857
+
 
 ---
 
