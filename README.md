@@ -46,3 +46,9 @@ cd frontend   # navega a la carpeta del repositorio del frontend
 npm install   # Solo la primera vez
 npm start     # Abre en localhost:3000
 ```
+
+# EL archivo donde se renderiza el grafico esta en el fontend en "Simulador.jsx"
+Entra a "frontend/src/Simulador.jsx" para ver donde se hace el plot de las graficas de la simulacion de rutherford
+
+# El archivo con la logica de la app donde se hacen el calculos de la trayectoria esta en el backend en "simulacion.py"
+Entra a "backend/simulador/simulacion.py" para ver como se calcula la trayectoria de la particula.

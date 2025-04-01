@@ -1,3 +1,6 @@
+# EL archivo donde se renderiza el grafico es "Simulador.jsx"
+Entra a "src/Simulador.jsx" para ver donde se hace el plot de las graficas de la simulacion de rutherford
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
