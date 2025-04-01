@@ -24,6 +24,9 @@ function Simulador() {
     setDatos(data);
   };
 
+  const rMin = datos ? Math.min(...datos.r) : null;
+  const rMinIndex = datos ? datos.r.indexOf(rMin) : null;
+
   return (
     <div className="container mt-4">
       <h2 className="text-center mb-4">Simulación de Dispersión de Rutherford</h2>
@@ -89,23 +92,31 @@ function Simulador() {
 
           <h3>2. Evolución de la distancia al núcleo</h3>
           <div className="d-flex justify-content-center mb-5">
-            <Plot
-              data={[
-                {
-                  y: datos.r,
-                  mode: "lines",
-                  type: "scatter",
-                  name: "Distancia r(t)",
-                },
-              ]}
-              layout={{
-                width: 600,
-                height: 300,
-                title: "Distancia de la partícula al núcleo vs paso de simulación",
-                xaxis: { title: { text: "Paso de simulación (sin unidades)" }, automargin: true },
-                yaxis: { title: { text: "Distancia r (fm)" }, automargin: true },
-              }}
-            />
+          <Plot
+            data={[
+              {
+                y: datos.r,
+                mode: "lines",
+                type: "scatter",
+                name: "Distancia r(t)",
+              },
+              rMinIndex !== null && {
+                x: [rMinIndex],
+                y: [rMin],
+                mode: "markers",
+                type: "scatter",
+                name: "rₘᵢₙ",
+                marker: { color: "green", size: 10 },
+              },
+            ].filter(Boolean)} // Elimina null si aún no hay datos
+            layout={{
+              width: 600,
+              height: 300,
+              title: "Distancia de la partícula al núcleo vs paso de simulación",
+              xaxis: { title: { text: "Paso de simulación (sin unidades)" }, automargin: true },
+              yaxis: { title: { text: "Distancia r (fm)" }, automargin: true },
+            }}
+          />
           </div>
 
           {/* Card Bootstrap */}
@@ -117,13 +128,26 @@ function Simulador() {
                 <li><b>v₀:</b> {parametros.v0} fm/fs</li>
                 <li><b>Δt:</b> {parametros.dt} fs</li>
                 <li><b>steps:</b> {parametros.steps}</li>
-                <li><b>θ final:</b> {datos.theta.toFixed(2)}°</li>
+                <li><span className="text-danger"><b>θ final:</b></span> {datos.theta.toFixed(2)}°</li>
+                <li><span className="text-success"><b>r<sub>min</sub>:</b></span> {rMin?.toFixed(3)} fm</li>
               </ul>
               <p className="mb-0 fs-5"><b>fm</b> = femtómetro = 10⁻¹⁵ metros</p>
               <p className="mb-0 fs-5"><b>fs</b> = femtosegundo = 10⁻¹⁵ segundos</p>
             </div>
           </div>
-        </>
+
+          {/* imagen de la simulación */}
+          <div className="text-center mb-5">
+            <img
+              src="/rutherford_scattering_geometry_2.png"
+              alt="Ilustración del experimento de Rutherford"
+              className="img-fluid rounded shadow"
+              style={{ maxWidth: "600px" }}
+            />
+            <p className="mt-2 text-muted">Ilustración del experimento de Rutherford</p>
+          </div>
+
+        </> 
       )}
     </div>
   );
