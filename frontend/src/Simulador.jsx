@@ -25,85 +25,103 @@ function Simulador() {
   };
 
   return (
-    <div>
-      <h2>Simulación de Dispersión de Rutherford</h2>
-      <div style={{ marginBottom: "1rem" }}>
-        <label>b (fm): </label>
-        <input type="number" name="b" value={parametros.b} onChange={handleChange} />
+    <div className="container mt-4">
+      <h2 className="text-center mb-4">Simulación de Dispersión de Rutherford</h2>
 
-        <label> v₀ (fm/fs): </label>
-        <input type="number" name="v0" value={parametros.v0} onChange={handleChange} />
-
-        <label> Δt (fs): </label>
-        <input type="number" name="dt" value={parametros.dt} onChange={handleChange} />
-
-        <label> steps: </label>
-        <input type="number" name="steps" value={parametros.steps} onChange={handleChange} />
-
-        <button onClick={simular}>Simular</button>
+      {/* Formulario */}
+      <div className="row g-3 mb-4">
+        {["b", "v0", "dt", "steps"].map((param) => (
+          <div className="col-md-3" key={param}>
+            <label className="form-label">
+              {param === "b" && "b (fm)"}
+              {param === "v0" && "v₀ (fm/fs)"}
+              {param === "dt" && "Δt (fs)"}
+              {param === "steps" && "Steps"}
+            </label>
+            <input
+              type="number"
+              name={param}
+              className="form-control"
+              value={parametros[param]}
+              onChange={handleChange}
+            />
+          </div>
+        ))}
+        <div className="col-md-12 text-end">
+          <button className="btn btn-primary" onClick={simular}>
+            Simular
+          </button>
+        </div>
       </div>
 
+      {/* Gráficos */}
       {datos && (
         <>
-          {/* Título personalizado para gráfico 1 */}
-          <h3>1. Trayectoria de la partícula (x vs y)</h3>
-          <Plot
-            data={[
-              {
-                x: datos.x,
-                y: datos.y,
-                mode: "lines",
-                type: "scatter",
-                name: "Trayectoria",
-              },
-              {
-                x: [0],
-                y: [0],
-                mode: "markers",
-                type: "scatter",
-                name: "Núcleo",
-                marker: { color: "red", size: 8 },
-              },
-            ]}
-            layout={{
-              width: 600,
-              height: 600,
-              title: `Ángulo de dispersión θ = ${datos.theta.toFixed(2)}°`,
-              xaxis: { title: "x (fm)" },
-              yaxis: { title: "y (fm)" },
-            }}
-          />
+          <h3 className="mt-5">1. Trayectoria de la partícula alfa</h3>
+          <div className="d-flex justify-content-center mb-4">
+            <Plot
+              data={[
+                {
+                  x: datos.x,
+                  y: datos.y,
+                  mode: "lines",
+                  type: "scatter",
+                  name: "Trayectoria",
+                },
+                {
+                  x: [0],
+                  y: [0],
+                  mode: "markers",
+                  type: "scatter",
+                  name: "Núcleo",
+                  marker: { color: "red", size: 10 },
+                },
+              ]}
+              layout={{
+                width: 600,
+                height: 600,
+                title: `Ángulo de dispersión θ = ${datos.theta.toFixed(2)}°`,
+                xaxis: { title: { text: "x (fm)" }, automargin: true },
+                yaxis: { title: { text: "y (fm)" }, automargin: true },
+              }}
+            />
+          </div>
 
-          {/* Título personalizado para gráfico 2 */}
-          <h3>2. Distancia al núcleo en función del tiempo</h3>
-          <Plot
-            data={[
-              {
-                y: datos.r,
-                mode: "lines",
-                type: "scatter",
-                name: "r(t)",
-              },
-            ]}
-            layout={{
-              width: 600,
-              height: 300,
-              title: "Distancia al núcleo vs paso",
-              xaxis: { title: "Paso de simulación" },
-              yaxis: { title: "Distancia r (fm)" },
-            }}
-          />
+          <h3>2. Evolución de la distancia al núcleo</h3>
+          <div className="d-flex justify-content-center mb-5">
+            <Plot
+              data={[
+                {
+                  y: datos.r,
+                  mode: "lines",
+                  type: "scatter",
+                  name: "Distancia r(t)",
+                },
+              ]}
+              layout={{
+                width: 600,
+                height: 300,
+                title: "Distancia de la partícula al núcleo vs paso de simulación",
+                xaxis: { title: { text: "Paso de simulación (sin unidades)" }, automargin: true },
+                yaxis: { title: { text: "Distancia r (fm)" }, automargin: true },
+              }}
+            />
+          </div>
 
-          {/* Tabla resumen */}
-          <div style={{ marginTop: "1rem" }}>
-            <h3>Parámetros usados:</h3>
-            <ul>
-              <li><b>b:</b> {parametros.b} fm (distancia inicial al núcleo)</li>
-              <li><b>v₀:</b> {parametros.v0} fm/fs (velocidad horizontal)</li>
-              <li><b>Δt:</b> {parametros.dt} fs (paso de tiempo)</li>
-              <li><b>steps:</b> {parametros.steps} (número de pasos)</li>
-              <li><b>θ final:</b> {datos.theta.toFixed(2)}°</li>
-            </ul>
+          {/* Card Bootstrap */}
+          <div className="card mb-5">
+            <div className="card-body">
+              <h5 className="mb-3 fs-4">Parámetros usados:</h5>
+              <ul className="mb-3 fs-5">
+                <li><b>b:</b> {parametros.b} fm</li>
+                <li><b>v₀:</b> {parametros.v0} fm/fs</li>
+                <li><b>Δt:</b> {parametros.dt} fs</li>
+                <li><b>steps:</b> {parametros.steps}</li>
+                <li><b>θ final:</b> {datos.theta.toFixed(2)}°</li>
+              </ul>
+              <p className="mb-0 fs-5"><b>fm</b> = femtómetro = 10⁻¹⁵ metros</p>
+              <p className="mb-0 fs-5"><b>fs</b> = femtosegundo = 10⁻¹⁵ segundos</p>
+            </div>
           </div>
         </>
       )}

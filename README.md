@@ -20,8 +20,12 @@ pip install -r ../requirements.txt  # Instala dependencias
 python manage.py runserver     # Levanta el servidor en localhost:8000
 ```
 
-Si ya tenías el entorno creado, solo haz: cd backend, env\Scripts\activate, python manage.py runserver
-
+Si ya tenías el entorno creado, solo haz: 
+```bash
+cd backend 
+env\Scripts\activate 
+python manage.py runserver
+```
 ### Frontend(React)
 ```bash
 cd frontend
