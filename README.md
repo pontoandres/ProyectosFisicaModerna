@@ -12,6 +12,15 @@ Este proyecto modela la trayectoria de una partícula alfa al acercarse a un nú
 
 ---
 
+## Requisitos previos
+
+Antes de correr el proyecto, asegúrate de tener instalado:
+
+- [x] **Python 3.12 o superior**
+- [x] **Node.js y npm** (https://nodejs.org/) – npm viene con Node
+
+---
+
 ## 🚀 ¿Cómo ejecutar el proyecto?
 
 Necesitas **python 3.12 y dos terminales abiertas al mismo tiempo**. Para abrir una terminal en windows presiona "windows key" + "R" y luego escribe cmd y presiona "enter". Necesitas dos terminales porque es una para el backend y otra para el frontend.  
